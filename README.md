@@ -1,2 +1,6 @@
 # ps-log
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+기간: 2025년 9월 ~
+
+언어: Java
+
+백준(BOJ)과 프로그래머스(Programmers) 문제 풀이를 백준허브를 통해 자동으로 업로드하는 저장소
