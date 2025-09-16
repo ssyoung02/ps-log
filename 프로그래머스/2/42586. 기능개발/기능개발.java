@@ -17,17 +17,12 @@ class Solution {
         
         while (!q.isEmpty()) {
             int cnt = 1;
-            if (q.size() > 1) { // q 마지막 요소 아닐 때
-                int last = q.poll();
-                while (!q.isEmpty() && q.peek() <= last) { 
-                    cnt++;
-                    q.poll();
-                }
-                list.add(cnt);
-            } else {
-                list.add(cnt);
+            int last = q.poll();
+            while (!q.isEmpty() && q.peek() <= last) {
+                cnt++;
                 q.poll();
-            }  
+            }
+            list.add(cnt);
         }
         
         int[] answer = new int[list.size()];
