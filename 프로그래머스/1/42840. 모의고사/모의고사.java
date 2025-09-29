@@ -12,16 +12,13 @@ class Solution {
         int[] three = {3,3,1,1,2,2,4,4,5,5};
         
         for (int i = 0; i < answers.length; i++) {
-            int index1 = i % 5;
-            int index2 = i % 8;
-            int index3 = i % 10;
-            if (answers[i] == one[index1]) {
+            if (answers[i] == one[i % 5]) {
                 correct1++;
             }
-            if (answers[i] == two[index2]) {
+            if (answers[i] == two[i % 8]) {
                 correct2++;
             }
-            if (answers[i] == three[index3]) {
+            if (answers[i] == three[i % 10]) {
                 correct3++;
             }
         }
