@@ -19,7 +19,7 @@ class Solution {
     private int bfs(int x, int y, int[][] maps){
         Queue<int[]> q = new LinkedList<>();
         
-        q.add(new int[]{x,y,1});
+        q.add(new int[]{x, y, 1});
         visited[0][0] = true;
         
         while (!q.isEmpty()){
@@ -37,13 +37,12 @@ class Solution {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
                 
-                if (nx < 0 || nx >= n || ny < 0 || ny >= m)
-                    continue;
-                if (maps[nx][ny] == 0)
-                    continue;
-                if (!visited[nx][ny] && maps[nx][ny] == 1){
-                    visited[nx][ny] = true;
-                    q.add(new int[]{nx, ny, cnt+1});
+            
+                if (nx >= 0 && nx < n && ny >= 0 && ny < m) {
+                    if (maps[nx][ny] == 1 && !visited[nx][ny]) {
+                        visited[nx][ny] = true;
+                        q.add(new int[]{nx, ny, cnt + 1});
+                    }
                 }
             }
         }
