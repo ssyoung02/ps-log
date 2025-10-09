@@ -12,11 +12,9 @@ class Solution {
     }
     
     public int solution(String begin, String target, String[] words) {
-        // target이 words 배열에 없을 때
         if (!Arrays.asList(words).contains(target)) {
             return 0;
         }
-        
         Queue<State> q = new LinkedList<>();
         boolean[] visited = new boolean[words.length];
         
@@ -45,6 +43,6 @@ class Solution {
                 cnt++;
             }
         }
-        return (cnt == 1);
+        return cnt == 1;
     }
 }
