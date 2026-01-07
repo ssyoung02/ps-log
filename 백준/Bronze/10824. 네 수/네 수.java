@@ -10,7 +10,7 @@ class Main {
 
         String ab = st.nextToken() + st.nextToken();
         String cd = st.nextToken() + st.nextToken();
-  
+
         long answer = Long.parseLong(ab) + Long.parseLong(cd);
         System.out.println(answer);
     }
