@@ -5,32 +5,24 @@ import java.util.*;
 
 class Main {
     static boolean[] visited;
-    static ArrayList<Integer>[] arr;
+    static int[] arr;
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(bf.readLine());
-        int t = Integer.parseInt(st.nextToken());
+        int t = Integer.parseInt(bf.readLine());
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < t; i++) {
             int cnt = 0;
-            st = new StringTokenizer(bf.readLine());
-            int n = Integer.parseInt(st.nextToken());
+            int n = Integer.parseInt(bf.readLine());
 
-            arr = new ArrayList[n+1];
+            arr = new int[n+1];
             visited = new boolean[n+1];
 
-            for (int j = 1; j <= n; j++) {
-                arr[j] = new ArrayList<>();
-            }
-
-            st = new StringTokenizer(bf.readLine());
+            StringTokenizer st = new StringTokenizer(bf.readLine());
 
             for (int j = 1; j <= n; j++) {
-                int num = Integer.parseInt(st.nextToken());
-                arr[j].add(num);
-                arr[num].add(j);
+               arr[j] = Integer.parseInt(st.nextToken());
             }
 
             for (int j = 1; j <=n; j++) {
@@ -40,7 +32,7 @@ class Main {
                 }
             }
 
-            sb.append(cnt + "\n");
+            sb.append(cnt).append("\n");
         }
 
         System.out.println(sb);
@@ -48,10 +40,10 @@ class Main {
 
     public static void dfs(int start) {
         visited[start] = true;
-        for (int next : arr[start]) {
-            if (!visited[next]) {
-                dfs(next);
-            }
+        int next = arr[start]; // 순열은 각 요소가 하나의 목적지만 가짐
+
+        if (!visited[next]) {
+            dfs(next);
         }
     }
 }
