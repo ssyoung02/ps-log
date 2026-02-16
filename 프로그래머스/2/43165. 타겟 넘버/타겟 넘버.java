@@ -2,20 +2,18 @@ class Solution {
     int answer = 0;
     
     public int solution(int[] numbers, int target) {
-        dfs(numbers, 0, target, 0);
+        dfs(numbers, target, 0, 0);
         return answer;
     }
-    
-    private void dfs(int[] numbers, int depth, int target, int calc){
-        if (depth == numbers.length) { //모든 numbers 연산 완료
+    public void dfs(int[] numbers, int target, int depth, int calc) {
+        if (depth == numbers.length) {
             if (calc == target) {
                 answer++;
             }
             return;
-        } 
-        else {
-            dfs(numbers, depth + 1, target, calc + numbers[depth]);
-            dfs(numbers, depth + 1, target, calc - numbers[depth]);
+        } else {
+            dfs(numbers, target, depth + 1, calc + numbers[depth]);
+            dfs(numbers, target, depth + 1, calc - numbers[depth]);
         }
     }
 }
