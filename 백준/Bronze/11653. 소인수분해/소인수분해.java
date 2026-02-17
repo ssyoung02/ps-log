@@ -5,18 +5,21 @@ class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        int num = 2;
-        int current = n;
         StringBuilder sb = new StringBuilder();
 
-        while (current > 0 && num <= n) {
-            if (current % num == 0) {
-                sb.append(num).append("\n");
-                current /= num;
-            } else {
-                num++;
+        if (n == 1) return;
+
+        for (int i = 2; i * i <= n; i++) {
+            while (n % i == 0) {
+                sb.append(i).append("\n");
+                n /= i;
             }
         }
+        
+        if (n > 1) {
+            sb.append(n).append("\n");
+        }
+            
         System.out.println(sb);
     }
 }
