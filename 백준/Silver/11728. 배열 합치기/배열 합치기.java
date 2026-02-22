@@ -10,24 +10,36 @@ class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        ArrayList<Integer> list = new ArrayList<>();
+        int[] a = new int[n];
+        int[] b = new int[m];
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            list.add(Integer.parseInt(st.nextToken()));
+            a[i] = Integer.parseInt(st.nextToken());
         }
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < m; i++) {
-            list.add(Integer.parseInt(st.nextToken()));
+            b[i] = Integer.parseInt(st.nextToken());
         }
 
-        Collections.sort(list);
+        int p1 = 0;
+        int p2 = 0;
+
         StringBuilder sb = new StringBuilder();
 
-        for (int num : list) {
-            sb.append(num).append(" ");
+        while (p1 < n && p2 < m) {
+            if (a[p1] < b[p2]) {
+                sb.append(a[p1++]).append(" ");
+            } else {
+                sb.append(b[p2++]).append(" ");
+            }
         }
+        while (p1 < n) 
+            sb.append(a[p1++]).append(" ");
+
+        while (p2 < m) 
+            sb.append(b[p2++]).append(" ");
 
         System.out.print(sb);
     }
