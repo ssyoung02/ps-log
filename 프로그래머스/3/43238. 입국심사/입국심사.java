@@ -18,13 +18,12 @@ class Solution {
             }
             
             if (cnt >= n) {
-                answer = mid;
                 high = mid - 1;
+                answer = mid;
             } else {
                 low = mid + 1;
             }
         }
-        
         return answer;
     }
 }
