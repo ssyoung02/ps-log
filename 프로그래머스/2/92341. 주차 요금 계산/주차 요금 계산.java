@@ -3,32 +3,31 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] fees, String[] records) {
        
-        HashMap<Integer, String> inCar = new HashMap<>();
+        HashMap<Integer, Integer> inCar = new HashMap<>();
         HashMap<Integer, Integer> map = new HashMap<>();
         
-        for (int i = 0; i < records.length; i++) {
-            String[] record = records[i].split(" ");
-            if (record[2].equals("IN")) {
-                inCar.put(Integer.parseInt(record[1]), record[0]);
+        for (String record : records) {
+            String[] r = record.split(" ");
+            
+            int time = toMin(r[0]);
+            int id = Integer.parseInt(r[1]);
+            
+            if (r[2].equals("IN")) {
+                inCar.put(id, time);
             } else {
-                String in = inCar.get(Integer.parseInt(record[1]));
-                String[] inTime = in.split(":");
-                String[] outTime = record[0].split(":");
+                int inTime = inCar.get(id);
+                int diff = time - inTime;
                 
-                int diff = (Integer.parseInt(outTime[0]) * 60 + Integer.parseInt(outTime[1])) - (Integer.parseInt(inTime[0]) * 60 + Integer.parseInt(inTime[1]));
-                
-                map.put(Integer.parseInt(record[1]), map.getOrDefault(Integer.parseInt(record[1]), 0) + diff);
-                inCar.remove(Integer.parseInt(record[1]));
+                map.put(id, map.getOrDefault(id, 0) + diff);
+                inCar.remove(id);
             }
         }
         
         if (!inCar.isEmpty()) {
             List<Integer> keySet = new ArrayList<>(inCar.keySet());
             for (int key : keySet) {
-                String in = inCar.get(key);
-                String[] inTime = in.split(":");
-                
-                int diff = (23 * 60 + 59) - (Integer.parseInt(inTime[0]) * 60 + Integer.parseInt(inTime[1]));
+                int inTime = inCar.get(key);
+                int diff = (23 * 60 + 59) - inTime;
                 
                 map.put(key, map.getOrDefault(key, 0) + diff);
             }
@@ -51,5 +50,9 @@ class Solution {
             
         }
         return answer;
+    }
+    
+    public int toMin(String time) {
+        return Integer.parseInt(time.substring(0,2)) * 60 + Integer.parseInt(time.substring(3));
     }
 }
