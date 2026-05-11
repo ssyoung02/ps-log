@@ -17,20 +17,19 @@ class Solution {
     
     public boolean isValid(String s) {
         Deque<Character> stack = new ArrayDeque<>();
-        
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '[' || s.charAt(i) == '(' || s.charAt(i) == '{') {
-                    stack.push(s.charAt(i));
+            
+        for (int j = 0; j < s.length(); j++) {
+            if (s.charAt(j) == '[' || s.charAt(j) == '(' || s.charAt(j) == '{') {
+                stack.push(s.charAt(j));
             } else {
-                if (stack.isEmpty()) {
+                if (stack.isEmpty()) return false;
+                else if (s.charAt(j) == ']' && stack.pop() != '[') 
                     return false;
-                } else {
-                    char c = stack.pop();
-                    if (s.charAt(i) == '}' && c != '{') return false;
-                    if (s.charAt(i) == ')' && c != '(') return false;
-                    if (s.charAt(i) == ']' && c != '[') return false;
-                } 
-            }  
+                else if (s.charAt(j) == ')' && stack.pop() != '(')
+                    return false;
+                else if (s.charAt(j) == '}' && stack.pop() != '{')
+                    return false;
+            }
         }
         return stack.isEmpty();
     }
