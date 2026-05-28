@@ -5,15 +5,15 @@ class Solution {
         dfs(numbers, target, 0, 0);
         return answer;
     }
-    public void dfs(int[] numbers, int target, int depth, int calc) {
+    
+    public void dfs(int[] numbers, int target, int depth, int cal) {
         if (depth == numbers.length) {
-            if (calc == target) {
+            if (target == cal) {
                 answer++;
-            }
-            return;
+            } return;
         } else {
-            dfs(numbers, target, depth + 1, calc + numbers[depth]);
-            dfs(numbers, target, depth + 1, calc - numbers[depth]);
+            dfs(numbers, target, depth + 1, cal + numbers[depth]);
+            dfs(numbers, target, depth + 1, cal - numbers[depth]);
         }
     }
 }
