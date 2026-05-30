@@ -2,11 +2,11 @@ import java.util.*;
 
 class Solution {
     int n, m, answer = -1;
-    Queue<Node> q = new LinkedList<>();
+    int[] dx = {-1, 1, 0, 0};
+    int[] dy = {0, 0, -1, 1};
     boolean[][] visited;
     
-    int[] dx = {0, 0, -1, 1};
-    int[] dy = {-1, 1, 0, 0};
+    Queue<Node> q = new ArrayDeque<>();
     
     class Node {
         int x, y, dist;
@@ -24,12 +24,13 @@ class Solution {
         
         visited[0][0] = true;
         q.add(new Node(0, 0, 0));
-        bfs(maps, 0, 0);
+        
+        bfs(0, 0, maps);
         
         return answer;
+        
     }
-    
-    public void bfs(int[][] maps, int x, int y) {
+    public void bfs(int x, int y, int[][] maps) {
         while (!q.isEmpty()) {
             Node node = q.poll();
             
@@ -37,14 +38,13 @@ class Solution {
                 answer = node.dist + 1;
                 return;
             }
-                        
-            for (int i = 0 ; i < 4; i++) {
-                int nx = node.x + dx[i];
-                int ny = node.y + dy[i];
-                int dist  = node.dist;
+            
+            for (int i = 0; i < 4; i++) {
+                int nx = dx[i] + node.x;
+                int ny = dy[i] + node.y;
+                int dist = node.dist;
                 
-                if (nx < 0 || ny < 0 || nx >= n || ny >= m || visited[nx][ny] || maps[nx][ny] == 0)
-                    continue;
+                if (nx >= n || ny >= m || nx < 0 || ny < 0 || visited[nx][ny] || maps[nx][ny] == 0) continue;
                 
                 visited[nx][ny] = true;
                 q.add(new Node(nx, ny, dist + 1));
