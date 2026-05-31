@@ -1,9 +1,6 @@
--- 코드를 작성해주세요
-select i.ID, n.FISH_NAME, i.LENGTH
-from FISH_INFO i
-join FISH_NAME_INFO n
-on i.FISH_TYPE = n.FISH_TYPE
-where (i.FISH_TYPE, i.LENGTH) IN (select FISH_TYPE, max(LENGTH)
-       from FISH_INFO
-       group by FISH_TYPE)
-order by i.ID;
+select i.id, n.fish_name, i.length
+from fish_info i join fish_name_info n
+on i.fish_type = n.fish_type
+where (i.fish_type, i.length) in (select i.fish_type, max(i.length)
+                                        from fish_info i
+                                        group by i.fish_type);
