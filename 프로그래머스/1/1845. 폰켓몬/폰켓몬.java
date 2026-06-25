@@ -2,18 +2,18 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] nums) {
-        int answer = 0;
-        HashMap <Integer, Integer> map = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
         
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(map.get(num), 0) + 1);
+        for (int i = 0; i < nums.length; i++) {
+            if (!set.contains(nums[i])) {
+                set.add(nums[i]);
+            }
         }
-        
-        if (map.size() > nums.length / 2) {
-            answer = nums.length / 2;
+        if (set.size() >= nums.length / 2) {
+            return nums.length / 2;
         } else {
-            answer = map.size();
+            return set.size();
         }
-        return answer;
+        
     }
 }
