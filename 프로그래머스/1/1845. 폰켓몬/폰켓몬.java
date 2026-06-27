@@ -4,16 +4,11 @@ class Solution {
     public int solution(int[] nums) {
         HashSet<Integer> set = new HashSet<>();
         
-        for (int i = 0; i < nums.length; i++) {
-            if (!set.contains(nums[i])) {
-                set.add(nums[i]);
-            }
+        for (int num : nums) {
+            set.add(num);
         }
-        if (set.size() >= nums.length / 2) {
-            return nums.length / 2;
-        } else {
-            return set.size();
-        }
+        
+        return Math.min(set.size(), nums.length / 2);
         
     }
 }
