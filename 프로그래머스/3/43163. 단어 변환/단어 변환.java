@@ -1,48 +1,57 @@
 import java.util.*;
 
 class Solution {
-    class State {
+    class Word {
         String word;
-        int steps;
-        
-        State(String word, int steps) {
+        int cnt;
+        public Word(String word, int cnt) {
             this.word = word;
-            this.steps = steps;
+            this.cnt = cnt;
         }
     }
     
+    boolean[] visited;
+    
     public int solution(String begin, String target, String[] words) {
-        if (!Arrays.asList(words).contains(target)) {
-            return 0;
-        }
-        Queue<State> q = new LinkedList<>();
-        boolean[] visited = new boolean[words.length];
+        Queue<Word> q = new ArrayDeque<>();
+        visited = new boolean[words.length];
         
-        q.add(new State(begin, 0));
+        q.add(new Word(begin, 0));
         
+        int answer = bfs(begin, target, words, q);
+                
+        return answer;
+    }
+    
+    public int bfs(String begin, String target, String[] words, Queue<Word> q) {
         while (!q.isEmpty()) {
-            State current = q.poll();
-            if (current.word.equals(target)) {
-                return current.steps;
-            }
+            Word temp = q.poll();
+            String word = temp.word;
+            int cnt = temp.cnt;
+            
+            if (word.equals(target)) {
+                return cnt;
+            } 
             
             for (int i = 0; i < words.length; i++) {
-                if (!visited[i] && canConvert(current.word, words[i])) {
+                if (isConvert(word, words[i]) && !visited[i]) {
+                    q.add(new Word(words[i], cnt + 1));
                     visited[i] = true;
-                    q.add(new State(words[i], current.steps + 1));
                 }
             }
         }
+        
         return 0;
+        
     }
     
-    private boolean canConvert(String word1, String word2) {
-        int cnt = 0;
-        for (int i = 0; i < word1.length(); i++) {
-            if (word1.charAt(i) != word2.charAt(i)) {
-                cnt++;
-            }
+     public boolean isConvert(String s1, String s2) {
+        int count = 0;
+        
+        for (int i = 0; i < s1.length(); i++) {
+            if (s1.charAt(i) != s2.charAt(i)) count++;
         }
-        return cnt == 1;
+        
+        return count == 1;
     }
 }
