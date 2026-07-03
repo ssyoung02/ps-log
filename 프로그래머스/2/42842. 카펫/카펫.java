@@ -1,18 +1,23 @@
-import java.util.*;
-
 class Solution {
     public int[] solution(int brown, int yellow) {
         int[] answer = new int[2];
-        for (int y = 1; y <= (int)Math.sqrt(yellow); y++) {
-            if (yellow % y == 0) {
-                int x = yellow / y;
-                if ((x + y) * 2 + 4 == brown) {
-                    answer[0] = x + 2;
-                    answer[1] = y + 2;
+        
+        int x = (int) Math.sqrt(yellow);
+        int y;
+        
+        while (true) {
+            if (yellow % x == 0) {
+                y = yellow / x;
+                if (brown == 2 * x + 2 * y + 4) {
                     break;
                 }
             }
+            x--;
         }
+        
+        answer[0] = y + 2;
+        answer[1] = x + 2;
+
         return answer;
     }
 }
