@@ -1,16 +1,16 @@
 import java.util.*;
 
 class Solution {
+    boolean[] visited;
+    
     class Word {
-        String word;
+        String s;
         int cnt;
-        public Word(String word, int cnt) {
-            this.word = word;
+        public Word (String s, int cnt) {
+            this.s = s;
             this.cnt = cnt;
         }
     }
-    
-    boolean[] visited;
     
     public int solution(String begin, String target, String[] words) {
         Queue<Word> q = new ArrayDeque<>();
@@ -19,19 +19,18 @@ class Solution {
         q.add(new Word(begin, 0));
         
         int answer = bfs(begin, target, words, q);
-                
         return answer;
     }
     
     public int bfs(String begin, String target, String[] words, Queue<Word> q) {
         while (!q.isEmpty()) {
             Word temp = q.poll();
-            String word = temp.word;
+            String word = temp.s;
             int cnt = temp.cnt;
             
             if (word.equals(target)) {
                 return cnt;
-            } 
+            }
             
             for (int i = 0; i < words.length; i++) {
                 if (isConvert(word, words[i]) && !visited[i]) {
@@ -40,12 +39,10 @@ class Solution {
                 }
             }
         }
-        
         return 0;
-        
     }
     
-     public boolean isConvert(String s1, String s2) {
+    public boolean isConvert(String s1, String s2) {
         int count = 0;
         
         for (int i = 0; i < s1.length(); i++) {
