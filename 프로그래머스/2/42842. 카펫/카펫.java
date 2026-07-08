@@ -1,14 +1,13 @@
 class Solution {
-    public int[] solution(int brown, int yellow) {        
-        for (int i = (int) Math.sqrt(yellow); i >= 1; i--) {
-            if (yellow % i == 0) {
-                int x = yellow / i;
-                if (brown == 2 * i + 2 * x + 4) {
-                    return new int[]{x + 2, i + 2};
+    public int[] solution(int brown, int yellow) {
+        for (int x = (int) Math.sqrt(yellow); x >= 1; x--) {
+            if (yellow % x == 0) {
+                int y = yellow / x;
+                if (x * 2 + y * 2 + 4 == brown) {
+                    return new int[]{y + 2, x + 2};
                 }
             }
         }
-     
         return new int[] {0, 0};
     }
 }
